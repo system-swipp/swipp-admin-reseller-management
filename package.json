@@ -1,17 +1,11 @@
 {
   "name": "swipp-admin-reseller-management",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Admin component for managing Swipp reseller companies, resellers, locations and availability",
-  "main": "src/wwElement.vue",
-  "scripts": {
-    "serve": "weweb-cli serve",
-    "publish": "weweb-cli publish --env production"
-  },
-  "dependencies": {
-    "@supabase/supabase-js": "^2.39.0"
-  },
-  "devDependencies": {
-    "@anthropic-ai/sdk": "^0.52.0"
+  "main": "ww-config.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/system-swipp/swipp-admin-reseller-management.git"
   },
   "keywords": [
     "weweb",
@@ -20,6 +14,21 @@
     "reseller",
     "management"
   ],
-  "author": "Swipp",
-  "license": "ISC"
+  "author": "Swipp <system@swipp.no>",
+  "license": "MIT",
+  "scripts": {
+    "serve": "weweb serve",
+    "build": "weweb build",
+    "test": "npm run build"
+  },
+  "devDependencies": {
+    "@weweb/cli": "latest",
+    "vue": "^3.3.0"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0"
+  }
 }
