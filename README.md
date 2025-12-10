@@ -57,7 +57,7 @@ Required tables (all with RLS):
 - `locations` - Available locations
 - `locations_companies` - Junction table for company-location relationships
 - `booking_availability` - Reseller availability settings
-- `availability_exceptions` - Unavailable periods per reseller
+- `booking_availability_exceptions` - Unavailable periods per reseller
 
 ## Modals
 

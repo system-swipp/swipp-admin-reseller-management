@@ -79,6 +79,22 @@
             />
           </div>
           <div class="toolbar-actions">
+            <!-- Company filter (only on Resellers tab) -->
+            <select v-if="activeTab === 'resellers'" v-model="companyFilter" class="filter-select">
+              <option value="all">{{ t.filter_all_companies }}</option>
+              <option v-for="company in resellerCompanies" :key="company.id" :value="company.id">
+                {{ company.display_name || company.legal_name }}
+              </option>
+            </select>
+            <!-- Country filter -->
+            <select v-model="countryFilter" class="filter-select">
+              <option value="all">{{ t.filter_all_countries }}</option>
+              <option value="NO">{{ t.country_NO }}</option>
+              <option value="SE">{{ t.country_SE }}</option>
+              <option value="DK">{{ t.country_DK }}</option>
+              <option value="FI">{{ t.country_FI }}</option>
+            </select>
+            <!-- Status filter -->
             <select v-model="statusFilter" class="filter-select">
               <option value="all">{{ t.filter_all }}</option>
               <option value="active">{{ t.filter_active }}</option>
@@ -130,7 +146,7 @@
                     <span class="meta-item">👥 {{ getCompanyResellerCount(company.id) }} {{ t.resellers_count }}</span>
                   </div>
                 </div>
-                <button @click.stop="openCompanyModal(company)" class="btn-icon" :title="t.edit">
+                <button @click.stop="openCompanyModal(company)" class="btn-icon" :title="t.tooltip_edit_company">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                     <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
@@ -181,13 +197,13 @@
                           <div class="reseller-availability" v-else>
                             <span class="availability-badge not-set">⚙️ {{ t.availability_not_set }}</span>
                           </div>
-                          <button @click="openAvailabilityModal(reseller)" class="btn-icon btn-sm" :title="t.edit_availability">
+                          <button @click="openAvailabilityModal(reseller)" class="btn-icon btn-sm" :title="t.tooltip_edit_events">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                               <circle cx="12" cy="12" r="3"></circle>
                               <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
                             </svg>
                           </button>
-                          <button @click="openResellerModal(reseller)" class="btn-icon btn-sm" :title="t.edit">
+                          <button @click="openResellerModal(reseller)" class="btn-icon btn-sm" :title="t.tooltip_edit_reseller">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                               <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                               <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
@@ -295,13 +311,13 @@
                     </span>
                   </td>
                   <td class="actions-cell">
-                    <button @click="openAvailabilityModal(reseller)" class="btn-icon btn-sm" :title="t.edit_availability">
+                    <button @click="openAvailabilityModal(reseller)" class="btn-icon btn-sm" :title="t.tooltip_edit_events">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="3"></circle>
                         <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
                       </svg>
                     </button>
-                    <button @click="openResellerModal(reseller)" class="btn-icon btn-sm" :title="t.edit">
+                    <button @click="openResellerModal(reseller)" class="btn-icon btn-sm" :title="t.tooltip_edit_reseller">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
@@ -790,6 +806,8 @@ export default {
       error: null,
       supabase: null,
       isMobile: false,
+      currentUser: null,
+      isAdmin: false,
 
       // Toast
       toast: {
@@ -806,6 +824,8 @@ export default {
       // Search & Filters
       searchQuery: '',
       statusFilter: 'all',
+      countryFilter: 'all',
+      companyFilter: 'all',
       locationSearchQuery: '',
 
       // Pagination
@@ -915,6 +935,11 @@ export default {
         )
       }
 
+      // Country filter
+      if (this.countryFilter !== 'all') {
+        result = result.filter(c => c.country_code === this.countryFilter)
+      }
+
       // Status filter
       if (this.statusFilter !== 'all') {
         const isActive = this.statusFilter === 'active'
@@ -946,6 +971,16 @@ export default {
           (r.phone || '').toLowerCase().includes(search) ||
           this.getCompanyName(r.company_id).toLowerCase().includes(search)
         )
+      }
+
+      // Company filter
+      if (this.companyFilter !== 'all') {
+        result = result.filter(r => r.company_id === this.companyFilter)
+      }
+
+      // Country filter
+      if (this.countryFilter !== 'all') {
+        result = result.filter(r => r.country_code === this.countryFilter)
       }
 
       // Status filter
@@ -988,6 +1023,15 @@ export default {
     this.handleResize()
     window.addEventListener('resize', this.handleResize)
     this.initSupabase()
+
+    // Check admin access before loading data
+    const hasAccess = await this.checkAdminAccess()
+    if (!hasAccess) {
+      this.error = this.t.error_not_admin
+      this.loading = false
+      return
+    }
+
     await this.loadData()
   },
 
@@ -1042,6 +1086,42 @@ export default {
       this.supabase = createClient(supabaseUrl, supabaseKey)
     },
 
+    async checkAdminAccess() {
+      try {
+        // Get current session
+        const { data: { session }, error: sessionError } = await this.supabase.auth.getSession()
+
+        if (sessionError || !session) {
+          console.warn('No active session - redirecting to login')
+          // Redirect to login if configured
+          const redirectUrl = this.content?.loginRedirectUrl
+          if (redirectUrl && typeof window !== 'undefined') {
+            window.location.href = redirectUrl
+          }
+          return false
+        }
+
+        // Check if user is admin by querying admin_users table
+        const { data: adminUser, error: adminError } = await this.supabase
+          .from('admin_users')
+          .select('id, active')
+          .eq('auth_id', session.user.id)
+          .single()
+
+        if (adminError || !adminUser || !adminUser.active) {
+          console.warn('User is not an active admin')
+          return false
+        }
+
+        this.currentUser = session.user
+        this.isAdmin = true
+        return true
+      } catch (err) {
+        console.error('Error checking admin access:', err)
+        return false
+      }
+    },
+
     async loadData() {
       this.loading = true
       this.error = null
@@ -1092,7 +1172,7 @@ export default {
 
         // Load exceptions
         const { data: exceptions, error: excError } = await this.supabase
-          .from('availability_exceptions')
+          .from('booking_availability_exceptions')
           .select('*')
           .gte('end_datetime', new Date().toISOString())
           .order('start_datetime')
@@ -1542,7 +1622,7 @@ export default {
         let endDatetime = `${this.exceptionForm.endDate}T${this.exceptionForm.endTime || '23:59'}:00`
 
         const { error } = await this.supabase
-          .from('availability_exceptions')
+          .from('booking_availability_exceptions')
           .insert([{
             booking_availability_id: availability.id,
             start_datetime: startDatetime,
@@ -1570,7 +1650,7 @@ export default {
     async deleteException(exceptionId) {
       try {
         const { error } = await this.supabase
-          .from('availability_exceptions')
+          .from('booking_availability_exceptions')
           .delete()
           .eq('id', exceptionId)
 

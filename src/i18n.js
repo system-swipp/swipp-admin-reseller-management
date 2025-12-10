@@ -35,6 +35,17 @@ export const i18n = {
     filter_inactive: 'Inaktive',
     filter_status: 'Status',
     filter_country: 'Land',
+    filter_all_countries: 'Alle land',
+    filter_all_companies: 'Alle selskaper',
+
+    // Auth & Access
+    error_not_admin: 'Du må være logget inn som administrator for å se denne siden.',
+    error_no_session: 'Du er ikke logget inn. Vennligst logg inn først.',
+
+    // Tooltips
+    tooltip_edit_events: 'Rediger events',
+    tooltip_edit_reseller: 'Rediger reseller',
+    tooltip_edit_company: 'Rediger selskap',
 
     // Companies
     companies_title: 'Selskaper',
@@ -214,6 +225,17 @@ export const i18n = {
     filter_inactive: 'Inactive',
     filter_status: 'Status',
     filter_country: 'Country',
+    filter_all_countries: 'All countries',
+    filter_all_companies: 'All companies',
+
+    // Auth & Access
+    error_not_admin: 'You must be logged in as an administrator to view this page.',
+    error_no_session: 'You are not logged in. Please log in first.',
+
+    // Tooltips
+    tooltip_edit_events: 'Edit events',
+    tooltip_edit_reseller: 'Edit reseller',
+    tooltip_edit_company: 'Edit company',
 
     // Companies
     companies_title: 'Companies',
@@ -393,6 +415,17 @@ export const i18n = {
     filter_inactive: 'Inaktiva',
     filter_status: 'Status',
     filter_country: 'Land',
+    filter_all_countries: 'Alla länder',
+    filter_all_companies: 'Alla företag',
+
+    // Auth & Access
+    error_not_admin: 'Du måste vara inloggad som administratör för att se denna sida.',
+    error_no_session: 'Du är inte inloggad. Vänligen logga in först.',
+
+    // Tooltips
+    tooltip_edit_events: 'Redigera events',
+    tooltip_edit_reseller: 'Redigera återförsäljare',
+    tooltip_edit_company: 'Redigera företag',
 
     // Companies
     companies_title: 'Företag',
@@ -572,6 +605,17 @@ export const i18n = {
     filter_inactive: 'Inaktive',
     filter_status: 'Status',
     filter_country: 'Land',
+    filter_all_countries: 'Alle lande',
+    filter_all_companies: 'Alle virksomheder',
+
+    // Auth & Access
+    error_not_admin: 'Du skal være logget ind som administrator for at se denne side.',
+    error_no_session: 'Du er ikke logget ind. Log venligst ind først.',
+
+    // Tooltips
+    tooltip_edit_events: 'Rediger events',
+    tooltip_edit_reseller: 'Rediger forhandler',
+    tooltip_edit_company: 'Rediger virksomhed',
 
     // Companies
     companies_title: 'Virksomheder',
