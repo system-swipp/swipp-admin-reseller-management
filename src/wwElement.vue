@@ -1079,11 +1079,30 @@ export default {
       this.expandedCompanyId = this.expandedCompanyId === companyId ? null : companyId
     },
 
-    // ===== DATA LOADING =====
+    // ===== DATA LOADING (singleton pattern) =====
     initSupabase() {
       const supabaseUrl = this.content?.supabaseUrl || 'https://prjefvmijalarmbxytjj.supabase.co'
       const supabaseKey = this.content?.supabaseAnonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InByamVmdm1pamFsYXJtYnh5dGpqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzODY1MjQsImV4cCI6MjA3Njk2MjUyNH0.4Czz_OjQIvmMDrz_lckxUcX3MUEu8O_WiDnP0q_6VWQ'
+
+      // 1. Prøv WeWeb Supabase plugin først (delt instans)
+      if (typeof wwLib !== 'undefined' && wwLib.wwPlugins?.supabase?.instance) {
+        this.supabase = wwLib.wwPlugins.supabase.instance
+        console.log('swipp_admin_reseller: Using WeWeb Supabase plugin')
+        return
+      }
+
+      // 2. Prøv global singleton (unngår "Multiple GoTrueClient instances")
+      const globalKey = `_supabase_${supabaseUrl}`
+      if (window[globalKey]) {
+        this.supabase = window[globalKey]
+        console.log('swipp_admin_reseller: Reusing existing Supabase client')
+        return
+      }
+
+      // 3. Opprett ny klient og lagre globalt
       this.supabase = createClient(supabaseUrl, supabaseKey)
+      window[globalKey] = this.supabase
+      console.log('swipp_admin_reseller: Created new Supabase client (singleton)')
     },
 
     async checkAdminAccess() {
