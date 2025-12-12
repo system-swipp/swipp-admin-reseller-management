@@ -1688,8 +1688,9 @@ export default {
 </script>
 
 <style scoped>
-/* ===== CSS VARIABLES ===== */
-:root {
+/* ===== BASE STYLES WITH CSS VARIABLES ===== */
+.admin-reseller-container {
+  /* CSS Variables - defined on container for scoped styles */
   --primary: #f97316;
   --primary-dark: #ea580c;
   --success: #22c55e;
@@ -1711,15 +1712,15 @@ export default {
   --shadow: 0 1px 3px rgba(0,0,0,0.1);
   --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
-}
 
-/* ===== BASE STYLES ===== */
-.admin-reseller-container {
+  /* Base container styles */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   max-width: 1400px;
   margin: 0 auto;
   padding: 24px;
-  color: var(--gray-900);
+  color: #111827;
+  background: #f9fafb;
+  min-height: 100vh;
 }
 
 /* ===== HEADER ===== */
@@ -2074,19 +2075,23 @@ export default {
 }
 
 .company-card {
-  background: var(--white);
-  border: 1px solid var(--gray-200);
-  border-radius: var(--radius-lg);
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
   overflow: hidden;
-  transition: box-shadow 0.2s;
+  transition: all 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  margin-bottom: 12px;
 }
 
 .company-card:hover {
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  border-color: #d1d5db;
 }
 
 .company-card.expanded {
-  border-color: var(--primary);
+  border-color: #f97316;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.15);
 }
 
 .company-header {
@@ -2154,8 +2159,8 @@ export default {
 }
 
 .status-inactive {
-  background: var(--gray-100);
-  color: var(--gray-600);
+  background: #f3f4f6;
+  color: #4b5563;
 }
 
 /* ===== COMPANY DETAILS ===== */
@@ -2278,6 +2283,10 @@ export default {
 /* ===== TABLE ===== */
 .resellers-table-container {
   overflow-x: auto;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .resellers-table {
@@ -2287,21 +2296,28 @@ export default {
 
 .resellers-table th,
 .resellers-table td {
-  padding: 12px 16px;
+  padding: 14px 16px;
   text-align: left;
-  border-bottom: 1px solid var(--gray-200);
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .resellers-table th {
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  color: var(--gray-500);
-  background: var(--gray-50);
+  letter-spacing: 0.05em;
+  color: #6b7280;
+  background: #f3f4f6;
+  border-bottom: 2px solid #e5e7eb;
 }
 
-.resellers-table tr:hover {
-  background: var(--gray-50);
+/* Zebra striping for better readability */
+.resellers-table tbody tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+.resellers-table tbody tr:hover {
+  background: #fef3e2;
 }
 
 .name-cell {
@@ -2323,10 +2339,16 @@ export default {
 }
 
 .reseller-card-mobile {
-  background: var(--white);
-  border: 1px solid var(--gray-200);
-  border-radius: var(--radius-lg);
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
   padding: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  transition: box-shadow 0.2s;
+}
+
+.reseller-card-mobile:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .card-header-mobile {
@@ -2423,23 +2445,26 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px;
   z-index: 1000;
+  backdrop-filter: blur(4px);
 }
 
 .modal {
-  background: var(--white);
-  border-radius: var(--radius-lg);
+  background: #ffffff;
+  border-radius: 12px;
   width: 100%;
   max-width: 560px;
   max-height: 90vh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid #e5e7eb;
 }
 
 .modal-sm {
@@ -2454,6 +2479,7 @@ export default {
   max-width: 400px;
   text-align: center;
   padding: 32px;
+  background: #ffffff;
 }
 
 .confirm-icon {
@@ -2466,18 +2492,20 @@ export default {
   align-items: flex-start;
   justify-content: space-between;
   padding: 20px 24px;
-  border-bottom: 1px solid var(--gray-200);
+  border-bottom: 1px solid #e5e7eb;
+  background: #ffffff;
 }
 
 .modal-header h2 {
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0;
+  color: #111827;
 }
 
 .modal-subtitle {
   font-size: 0.85rem;
-  color: var(--gray-500);
+  color: #6b7280;
   margin: 4px 0 0;
 }
 
@@ -2485,6 +2513,7 @@ export default {
   padding: 24px;
   overflow-y: auto;
   flex: 1;
+  background: #ffffff;
 }
 
 .modal-footer {
@@ -2492,8 +2521,8 @@ export default {
   justify-content: flex-end;
   gap: 12px;
   padding: 16px 24px;
-  border-top: 1px solid var(--gray-200);
-  background: var(--gray-50);
+  border-top: 1px solid #e5e7eb;
+  background: #f9fafb;
 }
 
 .modal-footer-centered {
@@ -2510,7 +2539,7 @@ export default {
   font-size: 0.85rem;
   font-weight: 500;
   margin-bottom: 6px;
-  color: var(--gray-700);
+  color: #374151;
 }
 
 .form-row {
@@ -2528,17 +2557,19 @@ export default {
 .form-textarea {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid var(--gray-200);
-  border-radius: var(--radius);
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
   font-size: 0.9rem;
   font-family: inherit;
+  background: #ffffff;
+  color: #111827;
 }
 
 .form-input:focus,
 .form-select:focus,
 .form-textarea:focus {
   outline: none;
-  border-color: var(--primary);
+  border-color: #f97316;
   box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
 }
 
@@ -2550,7 +2581,7 @@ export default {
 .form-hint {
   display: block;
   font-size: 0.75rem;
-  color: var(--gray-500);
+  color: #6b7280;
   margin-top: 4px;
 }
 
